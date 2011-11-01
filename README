@@ -1,0 +1,80 @@
+Dist-Zilla-PluginBundle-CJM version 4.10, released November 1, 2011
+
+
+Dist::Zilla::PluginBundle::CJM is the basic configuration I use when
+building CPAN modules with Dist::Zilla.  This distribution used to
+include a collection of plugins I've written, but those are now
+distributed separately (in Dist-Zilla-Plugins-CJM), so that you don't
+have to install every single plugin I use and all their prerequisites.
+
+If you previously installed this bundle to get one of the plugins, you
+should uninstall this bundle, and install Dist-Zilla-Plugins-CJM instead.
+Sorry for any confusion this causes.
+
+
+
+INSTALLATION
+
+To install this module, run the following commands:
+
+    perl Makefile.PL
+    make
+    make test
+    make install
+
+
+
+DEPENDENCIES
+
+  Package                                  Minimum Version
+  ---------------------------------------- ---------------
+  Dist::Zilla                               4.200001
+  Dist::Zilla::Plugin::ArchiveRelease       0.08
+  Dist::Zilla::Plugin::ExtraTests           
+  Dist::Zilla::Plugin::GatherDir            
+  Dist::Zilla::Plugin::GitVersionCheckCJM   4.00
+  Dist::Zilla::Plugin::License              
+  Dist::Zilla::Plugin::MakeMaker            
+  Dist::Zilla::Plugin::ManifestSkip         
+  Dist::Zilla::Plugin::MatchManifest        4.00
+  Dist::Zilla::Plugin::MetaConfig           
+  Dist::Zilla::Plugin::MetaJSON             
+  Dist::Zilla::Plugin::MetaYAML             
+  Dist::Zilla::Plugin::PodCoverageTests     
+  Dist::Zilla::Plugin::PodLoom              4.01
+  Dist::Zilla::Plugin::PodSyntaxTests       
+  Dist::Zilla::Plugin::PruneCruft           
+  Dist::Zilla::Plugin::RecommendedPrereqs   
+  Dist::Zilla::Plugin::Repository           0.16
+  Dist::Zilla::Plugin::TemplateCJM          4.00
+  Dist::Zilla::Plugin::TestRelease          
+  Dist::Zilla::Plugin::UploadToCPAN         
+  Dist::Zilla::Plugin::VersionFromModule    0.08
+  Dist::Zilla::PluginBundle::Git            1.103520
+  Dist::Zilla::Role::PluginBundle::Easy     
+  Git::Wrapper                              
+  Moose                                     0.65
+  Moose::Autobox                            0.09
+
+
+
+CHANGES
+    Here's what's new in version 4.10 of Dist-Zilla-PluginBundle-CJM:
+    (See the file "Changes" for the full revision history.)
+
+	- Rename bundle from @CJM to @Author::CJM.  This dist still
+	  contains a @CJM bundle, but it just issues a deprecation
+	  warning and loads @Author::CJM.  It will be removed soon.
+	- Add RecommendedPrereqs
+	- Pass check_files param to GitVersionCheckCJM
+	- Pass changelog_re param to TemplateCJM
+	- Require PodLoom version 4.01 (latest version)
+
+
+
+COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Christopher J. Madsen.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.

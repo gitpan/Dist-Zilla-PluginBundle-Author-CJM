@@ -1,0 +1,212 @@
+#---------------------------------------------------------------------
+package Dist::Zilla::PluginBundle::Author::CJM;
+#
+# Copyright 2011 Christopher J. Madsen
+#
+# Author: Christopher J. Madsen <perl@cjmweb.net>
+# Created:  19 Oct 2011
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the same terms as Perl itself.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See either the
+# GNU General Public License or the Artistic License for more details.
+#
+# ABSTRACT: Build a distribution like CJM
+#---------------------------------------------------------------------
+
+our $VERSION = '4.10';
+# This file is part of Dist-Zilla-PluginBundle-Author-CJM 4.10 (November 1, 2011)
+
+use Moose;
+use Moose::Autobox;
+with 'Dist::Zilla::Role::PluginBundle::Easy';
+
+
+sub configure
+{
+  my $self = shift;
+
+  my $arg = $self->payload;
+
+  $self->add_plugins('VersionFromModule')
+      unless $arg->{manual_version};
+
+  $self->add_plugins(
+    qw(
+      GatherDir
+      PruneCruft
+      ManifestSkip
+      MetaJSON
+      MetaYAML
+      License
+      PodSyntaxTests
+      PodCoverageTests
+      ExtraTests
+    ),
+    [PodLoom => {
+      data => 'tools/loom.pl',
+      $self->config_slice({
+        pod_template => 'template',
+      })->flatten,
+    } ],
+    # either MakeMaker or ModuleBuild:
+    [ ($arg->{builder} || 'MakeMaker') =>
+      scalar $self->config_slice(qw( eumm_version mb_version ))
+    ],
+    qw(
+      MetaConfig
+      MatchManifest
+      RecommendedPrereqs
+    ),
+    [ GitVersionCheckCJM => scalar $self->config_slice({
+        check_files => 'finder'
+    }) ],
+    [ TemplateCJM => scalar $self->config_slice('changelog_re') ],
+    [ Repository => { git_remote => 'github' } ],
+  );
+
+  $self->add_bundle(Git => {
+    allow_dirty => 'Changes',
+    commit_msg  => 'Updated Changes for %{MMMM d, yyyy}d%{ trial}t release of %v',
+    tag_format  => '%v%t',
+    tag_message => 'Tagged %N %v%{ (trial release)}t',
+    push_to     => 'github master',
+  });
+
+  $self->add_plugins(
+    'TestRelease',
+    'UploadToCPAN',
+    [ ArchiveRelease => { directory => 'cjm_releases' } ],
+  );
+} # end configure
+
+sub mvp_multivalue_args { qw(check_files) }
+
+no Moose;
+__PACKAGE__->meta->make_immutable;
+1;
+
+__END__
+
+=head1 NAME
+
+Dist::Zilla::PluginBundle::Author::CJM - Build a distribution like CJM
+
+=head1 VERSION
+
+This document describes version 4.10 of
+Dist::Zilla::PluginBundle::Author::CJM, released November 1, 2011
+as part of Dist-Zilla-PluginBundle-Author-CJM version 4.10.
+
+=head1 SYNOPSIS
+
+In dist.ini:
+
+  [@Author::CJM / CJM]
+
+=head1 DESCRIPTION
+
+This is the plugin bundle that CJM uses. It is equivalent to:
+
+  [VersionFromModule]
+
+  [GatherDir]
+  [PruneCruft]
+  [ManifestSkip]
+  [MetaJSON]
+  [MetaYAML]
+  [License]
+  [PodSyntaxTests]
+  [PodCoverageTests]
+  [ExtraTests]
+  [PodLoom]
+  data = tools/loom.pl
+  [MakeMaker]
+  [MetaConfig]
+  [MatchManifest]
+  [RecommendedPrereqs]
+  [GitVersionCheckCJM]
+  [TemplateCJM]
+
+  [Repository]
+  git_remote  = github
+
+  [@Git]
+  allow_dirty = Changes
+  commit_msg  = Updated Changes for %{MMMM d, yyyy}d%{ trial}t release of %v
+  tag_format  = %v%t
+  tag_message = Tagged %N %v%{ (trial release)}t
+  push_to     = github master
+
+  [TestRelease]
+  [UploadToCPAN]
+  [ArchiveRelease]
+  directory = cjm_releases
+
+If the C<manual_version> argument is given to the bundle,
+VersionFromModule is omitted.  If the C<builder> argument is given, it
+is used instead of MakeMaker.  If the C<pod_template> argument is
+given, it is passed to PodLoom as its C<template>.
+
+=for Pod::Coverage
+configure
+mvp_multivalue_args
+
+=head1 CONFIGURATION AND ENVIRONMENT
+
+Dist::Zilla::PluginBundle::Author::CJM requires no configuration files or environment variables.
+
+=head1 INCOMPATIBILITIES
+
+None reported.
+
+=head1 BUGS AND LIMITATIONS
+
+No bugs have been reported.
+
+=head1 AUTHOR
+
+Christopher J. Madsen  S<C<< <perl AT cjmweb.net> >>>
+
+Please report any bugs or feature requests
+to S<C<< <bug-Dist-Zilla-PluginBundle-Author-CJM AT rt.cpan.org> >>>
+or through the web interface at
+L<< http://rt.cpan.org/Public/Bug/Report.html?Queue=Dist-Zilla-PluginBundle-Author-CJM >>.
+
+You can follow or contribute to Dist-Zilla-PluginBundle-Author-CJM's development at
+L<< http://github.com/madsen/dist-zilla-pluginbundle-cjm >>.
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Christopher J. Madsen.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=head1 DISCLAIMER OF WARRANTY
+
+BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
+FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN
+OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
+PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE
+ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH
+YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
+NECESSARY SERVICING, REPAIR, OR CORRECTION.
+
+IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
+REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENSE, BE
+LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL,
+OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE
+THE SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
+RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
+FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
+SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGES.
+
+=cut
