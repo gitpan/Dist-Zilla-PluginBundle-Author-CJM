@@ -22,6 +22,7 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "Dist::Zilla" => "4.200001",
     "Dist::Zilla::Plugin::ArchiveRelease" => "0.08",
+    "Dist::Zilla::Plugin::CheckPrereqsIndexed" => "0.006",
     "Dist::Zilla::Plugin::ExtraTests" => 0,
     "Dist::Zilla::Plugin::GatherDir" => 0,
     "Dist::Zilla::Plugin::GitVersionCheckCJM" => "4.00",
@@ -48,7 +49,7 @@ my %WriteMakefileArgs = (
     "Moose" => "0.65",
     "Moose::Autobox" => "0.09"
   },
-  "VERSION" => "4.10",
+  "VERSION" => "4.11",
   "test" => {
     "TESTS" => "t/*.t"
   }

@@ -14,11 +14,11 @@ package Dist::Zilla::PluginBundle::CJM;
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See either the
 # GNU General Public License or the Artistic License for more details.
 #
-# ABSTRACT: Build a distribution like CJM
+# ABSTRACT: DEPRECATED plugin bundle for CJM
 #---------------------------------------------------------------------
 
-our $VERSION = '4.10';
-# This file is part of Dist-Zilla-PluginBundle-Author-CJM 4.10 (November 1, 2011)
+our $VERSION = '4.11';
+# This file is part of Dist-Zilla-PluginBundle-Author-CJM 4.11 (November 11, 2011)
 
 use Moose;
 extends 'Dist::Zilla::PluginBundle::Author::CJM';
@@ -40,13 +40,13 @@ __END__
 
 =head1 NAME
 
-Dist::Zilla::PluginBundle::CJM - Build a distribution like CJM
+Dist::Zilla::PluginBundle::CJM - DEPRECATED plugin bundle for CJM
 
 =head1 VERSION
 
-This document describes version 4.10 of
-Dist::Zilla::PluginBundle::CJM, released November 1, 2011
-as part of Dist-Zilla-PluginBundle-Author-CJM version 4.10.
+This document describes version 4.11 of
+Dist::Zilla::PluginBundle::CJM, released November 11, 2011
+as part of Dist-Zilla-PluginBundle-Author-CJM version 4.11.
 
 =head1 DESCRIPTION
 

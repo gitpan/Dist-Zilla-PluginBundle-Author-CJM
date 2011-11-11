@@ -17,8 +17,8 @@ package Dist::Zilla::PluginBundle::Author::CJM;
 # ABSTRACT: Build a distribution like CJM
 #---------------------------------------------------------------------
 
-our $VERSION = '4.10';
-# This file is part of Dist-Zilla-PluginBundle-Author-CJM 4.10 (November 1, 2011)
+our $VERSION = '4.11';
+# This file is part of Dist-Zilla-PluginBundle-Author-CJM 4.11 (November 11, 2011)
 
 use Moose;
 use Moose::Autobox;
@@ -59,8 +59,13 @@ sub configure
     qw(
       MetaConfig
       MatchManifest
-      RecommendedPrereqs
     ),
+    [ RecommendedPrereqs => scalar $self->config_slice({
+        check_recommend => 'finder'
+    }) ],
+    [ CheckPrereqsIndexed => scalar $self->config_slice({
+        skip_index_check => 'skips'
+    }) ],
     [ GitVersionCheckCJM => scalar $self->config_slice({
         check_files => 'finder'
     }) ],
@@ -81,9 +86,17 @@ sub configure
     'UploadToCPAN',
     [ ArchiveRelease => { directory => 'cjm_releases' } ],
   );
+
+  if (my $remove = $arg->{remove_plugin}) {
+    my $prefix  = $self->name . '/';
+    my %remove = map { $prefix . $_ => 1 } @$remove;
+    my $plugins = $self->plugins;
+    @$plugins = grep { not $remove{$_->[0]} } @$plugins;
+  }
 } # end configure
 
-sub mvp_multivalue_args { qw(check_files) }
+sub mvp_multivalue_args { qw(check_files check_recommend remove_plugin
+                             skip_index_check) }
 
 no Moose;
 __PACKAGE__->meta->make_immutable;
@@ -97,9 +110,9 @@ Dist::Zilla::PluginBundle::Author::CJM - Build a distribution like CJM
 
 =head1 VERSION
 
-This document describes version 4.10 of
-Dist::Zilla::PluginBundle::Author::CJM, released November 1, 2011
-as part of Dist-Zilla-PluginBundle-Author-CJM version 4.10.
+This document describes version 4.11 of
+Dist::Zilla::PluginBundle::Author::CJM, released November 11, 2011
+as part of Dist-Zilla-PluginBundle-Author-CJM version 4.11.
 
 =head1 SYNOPSIS
 
@@ -128,6 +141,7 @@ This is the plugin bundle that CJM uses. It is equivalent to:
   [MetaConfig]
   [MatchManifest]
   [RecommendedPrereqs]
+  [CheckPrereqsIndexed]
   [GitVersionCheckCJM]
   [TemplateCJM]
 
@@ -146,10 +160,58 @@ This is the plugin bundle that CJM uses. It is equivalent to:
   [ArchiveRelease]
   directory = cjm_releases
 
-If the C<manual_version> argument is given to the bundle,
-VersionFromModule is omitted.  If the C<builder> argument is given, it
-is used instead of MakeMaker.  If the C<pod_template> argument is
-given, it is passed to PodLoom as its C<template>.
+=head1 ATTRIBUTES
+
+=head2 builder
+
+Use the specified plugin instead of MakeMaker.
+
+
+=head2 changelog_re
+
+Passed to TemplateCJM.
+
+
+=head2 check_files
+
+Passed to GitVersionCheckCJM as its C<finder>.
+
+
+=head2 check_recommend
+
+Passed to RecommendedPrereqs as its C<finder>.
+
+
+=head2 eumm_version
+
+Passed to MakeMaker (or its replacement C<builder>).
+
+
+=head2 manual_version
+
+If true, VersionFromModule is omitted.
+
+
+=head2 mb_version
+
+Passed to MakeMaker (or its replacement C<builder>).
+
+
+=head2 pod_template
+
+Passed to PodLoom as its C<template>.
+
+
+=head2 remove_plugin
+
+The named plugin is removed from the bundle (may be specified multiple
+times).  This exists because you can't pass multi-value parameters
+through L<@Filter|Dist::Zilla::PluginBundle::Filter>.
+
+
+=head2 skip_index_check
+
+Passed to CheckPrereqsIndexed as its C<skips>.
 
 =for Pod::Coverage
 configure

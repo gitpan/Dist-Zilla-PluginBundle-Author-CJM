@@ -23,6 +23,7 @@
          "requires" : {
             "Dist::Zilla" : "4.200001",
             "Dist::Zilla::Plugin::ArchiveRelease" : "0.08",
+            "Dist::Zilla::Plugin::CheckPrereqsIndexed" : "0.006",
             "Dist::Zilla::Plugin::ExtraTests" : 0,
             "Dist::Zilla::Plugin::GatherDir" : 0,
             "Dist::Zilla::Plugin::GitVersionCheckCJM" : "4.00",
@@ -59,7 +60,7 @@
          "web" : "http://github.com/madsen/dist-zilla-pluginbundle-cjm"
       }
    },
-   "version" : "4.10",
+   "version" : "4.11",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
@@ -141,9 +142,14 @@
             "version" : "4.00"
          },
          {
+            "class" : "Dist::Zilla::Plugin::CheckPrereqsIndexed",
+            "name" : "CJM/CheckPrereqsIndexed",
+            "version" : "0.006"
+         },
+         {
             "class" : "Dist::Zilla::Plugin::GitVersionCheckCJM",
             "name" : "CJM/GitVersionCheckCJM",
-            "version" : "4.00"
+            "version" : "4.03"
          },
          {
             "class" : "Dist::Zilla::Plugin::TemplateCJM",
