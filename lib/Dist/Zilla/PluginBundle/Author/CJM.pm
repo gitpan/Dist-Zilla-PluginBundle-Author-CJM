@@ -17,8 +17,8 @@ package Dist::Zilla::PluginBundle::Author::CJM;
 # ABSTRACT: Build a distribution like CJM
 #---------------------------------------------------------------------
 
-our $VERSION = '4.11';
-# This file is part of Dist-Zilla-PluginBundle-Author-CJM 4.11 (November 11, 2011)
+our $VERSION = '4.12';
+# This file is part of Dist-Zilla-PluginBundle-Author-CJM 4.12 (December 12, 2011)
 
 use Moose;
 use Moose::Autobox;
@@ -42,6 +42,7 @@ sub configure
       MetaJSON
       MetaYAML
       License
+      Test::PrereqsFromMeta
       PodSyntaxTests
       PodCoverageTests
       ExtraTests
@@ -49,6 +50,7 @@ sub configure
     [PodLoom => {
       data => 'tools/loom.pl',
       $self->config_slice({
+        pod_finder   => 'finder',
         pod_template => 'template',
       })->flatten,
     } ],
@@ -69,7 +71,12 @@ sub configure
     [ GitVersionCheckCJM => scalar $self->config_slice({
         check_files => 'finder'
     }) ],
-    [ TemplateCJM => scalar $self->config_slice('changelog_re') ],
+    [ TemplateCJM => scalar $self->config_slice(
+        'changelog_re',
+        { pod_finder    => 'finder',
+          template_file => 'file',
+        },
+      ) ],
     [ Repository => { git_remote => 'github' } ],
   );
 
@@ -96,7 +103,7 @@ sub configure
 } # end configure
 
 sub mvp_multivalue_args { qw(check_files check_recommend remove_plugin
-                             skip_index_check) }
+                             pod_finder skip_index_check template_file) }
 
 no Moose;
 __PACKAGE__->meta->make_immutable;
@@ -110,9 +117,9 @@ Dist::Zilla::PluginBundle::Author::CJM - Build a distribution like CJM
 
 =head1 VERSION
 
-This document describes version 4.11 of
-Dist::Zilla::PluginBundle::Author::CJM, released November 11, 2011
-as part of Dist-Zilla-PluginBundle-Author-CJM version 4.11.
+This document describes version 4.12 of
+Dist::Zilla::PluginBundle::Author::CJM, released December 12, 2011
+as part of Dist-Zilla-PluginBundle-Author-CJM version 4.12.
 
 =head1 SYNOPSIS
 
@@ -132,6 +139,7 @@ This is the plugin bundle that CJM uses. It is equivalent to:
   [MetaJSON]
   [MetaYAML]
   [License]
+  [Test::PrereqsFromMeta]
   [PodSyntaxTests]
   [PodCoverageTests]
   [ExtraTests]
@@ -197,6 +205,11 @@ If true, VersionFromModule is omitted.
 Passed to MakeMaker (or its replacement C<builder>).
 
 
+=head2 pod_finder
+
+Passed to both PodLoom and TemplateCJM as their C<finder>.
+
+
 =head2 pod_template
 
 Passed to PodLoom as its C<template>.
@@ -212,6 +225,11 @@ through L<@Filter|Dist::Zilla::PluginBundle::Filter>.
 =head2 skip_index_check
 
 Passed to CheckPrereqsIndexed as its C<skips>.
+
+
+=head2 template_file
+
+Passed to TemplateCJM as its C<file>.
 
 =for Pod::Coverage
 configure

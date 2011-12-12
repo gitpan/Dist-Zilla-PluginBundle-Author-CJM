@@ -35,12 +35,13 @@
             "Dist::Zilla::Plugin::MetaJSON" : 0,
             "Dist::Zilla::Plugin::MetaYAML" : 0,
             "Dist::Zilla::Plugin::PodCoverageTests" : 0,
-            "Dist::Zilla::Plugin::PodLoom" : "4.01",
+            "Dist::Zilla::Plugin::PodLoom" : "4.10",
             "Dist::Zilla::Plugin::PodSyntaxTests" : 0,
             "Dist::Zilla::Plugin::PruneCruft" : 0,
             "Dist::Zilla::Plugin::RecommendedPrereqs" : 0,
             "Dist::Zilla::Plugin::Repository" : "0.16",
             "Dist::Zilla::Plugin::TemplateCJM" : "4.00",
+            "Dist::Zilla::Plugin::Test::PrereqsFromMeta" : 0,
             "Dist::Zilla::Plugin::TestRelease" : 0,
             "Dist::Zilla::Plugin::UploadToCPAN" : 0,
             "Dist::Zilla::Plugin::VersionFromModule" : "0.08",
@@ -60,7 +61,7 @@
          "web" : "http://github.com/madsen/dist-zilla-pluginbundle-cjm"
       }
    },
-   "version" : "4.11",
+   "version" : "4.12",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
@@ -99,6 +100,11 @@
             "version" : "4.300003"
          },
          {
+            "class" : "Dist::Zilla::Plugin::Test::PrereqsFromMeta",
+            "name" : "CJM/Test::PrereqsFromMeta",
+            "version" : "4.04"
+         },
+         {
             "class" : "Dist::Zilla::Plugin::PodSyntaxTests",
             "name" : "CJM/PodSyntaxTests",
             "version" : "4.300003"
@@ -119,7 +125,7 @@
                "Pod::Loom version" : "0.05"
             },
             "name" : "CJM/PodLoom",
-            "version" : "4.01"
+            "version" : "4.10"
          },
          {
             "class" : "Dist::Zilla::Plugin::MakeMaker",

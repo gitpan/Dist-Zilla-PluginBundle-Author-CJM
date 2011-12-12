@@ -34,12 +34,13 @@ my %WriteMakefileArgs = (
     "Dist::Zilla::Plugin::MetaJSON" => 0,
     "Dist::Zilla::Plugin::MetaYAML" => 0,
     "Dist::Zilla::Plugin::PodCoverageTests" => 0,
-    "Dist::Zilla::Plugin::PodLoom" => "4.01",
+    "Dist::Zilla::Plugin::PodLoom" => "4.10",
     "Dist::Zilla::Plugin::PodSyntaxTests" => 0,
     "Dist::Zilla::Plugin::PruneCruft" => 0,
     "Dist::Zilla::Plugin::RecommendedPrereqs" => 0,
     "Dist::Zilla::Plugin::Repository" => "0.16",
     "Dist::Zilla::Plugin::TemplateCJM" => "4.00",
+    "Dist::Zilla::Plugin::Test::PrereqsFromMeta" => 0,
     "Dist::Zilla::Plugin::TestRelease" => 0,
     "Dist::Zilla::Plugin::UploadToCPAN" => 0,
     "Dist::Zilla::Plugin::VersionFromModule" => "0.08",
@@ -49,7 +50,7 @@ my %WriteMakefileArgs = (
     "Moose" => "0.65",
     "Moose::Autobox" => "0.09"
   },
-  "VERSION" => "4.11",
+  "VERSION" => "4.12",
   "test" => {
     "TESTS" => "t/*.t"
   }
