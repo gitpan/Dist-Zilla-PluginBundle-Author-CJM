@@ -17,8 +17,8 @@ package Dist::Zilla::PluginBundle::Author::CJM;
 # ABSTRACT: Build a distribution like CJM
 #---------------------------------------------------------------------
 
-our $VERSION = '4.12';
-# This file is part of Dist-Zilla-PluginBundle-Author-CJM 4.12 (December 12, 2011)
+our $VERSION = '4.13';
+# This file is part of Dist-Zilla-PluginBundle-Author-CJM 4.13 (March 21, 2012)
 
 use Moose;
 use Moose::Autobox;
@@ -56,7 +56,7 @@ sub configure
     } ],
     # either MakeMaker or ModuleBuild:
     [ ($arg->{builder} || 'MakeMaker') =>
-      scalar $self->config_slice(qw( eumm_version mb_version ))
+      scalar $self->config_slice(qw( eumm_version mb_version mb_class ))
     ],
     qw(
       MetaConfig
@@ -117,9 +117,9 @@ Dist::Zilla::PluginBundle::Author::CJM - Build a distribution like CJM
 
 =head1 VERSION
 
-This document describes version 4.12 of
-Dist::Zilla::PluginBundle::Author::CJM, released December 12, 2011
-as part of Dist-Zilla-PluginBundle-Author-CJM version 4.12.
+This document describes version 4.13 of
+Dist::Zilla::PluginBundle::Author::CJM, released March 21, 2012
+as part of Dist-Zilla-PluginBundle-Author-CJM version 4.13.
 
 =head1 SYNOPSIS
 
@@ -200,6 +200,11 @@ Passed to MakeMaker (or its replacement C<builder>).
 If true, VersionFromModule is omitted.
 
 
+=head2 mb_class
+
+Passed to MakeMaker (or its replacement C<builder>).
+
+
 =head2 mb_version
 
 Passed to MakeMaker (or its replacement C<builder>).
@@ -261,7 +266,7 @@ L<< http://github.com/madsen/dist-zilla-pluginbundle-cjm >>.
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Christopher J. Madsen.
+This software is copyright (c) 2012 by Christopher J. Madsen.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -1,4 +1,4 @@
-Dist-Zilla-PluginBundle-CJM version 4.12, released December 12, 2011
+Dist-Zilla-PluginBundle-CJM version 4.13, released March 21, 2012
 
 
 Dist::Zilla::PluginBundle::CJM is the basic configuration I use when
@@ -45,7 +45,7 @@ DEPENDENCIES
   Dist::Zilla::Plugin::PodLoom                 4.10
   Dist::Zilla::Plugin::PodSyntaxTests          
   Dist::Zilla::Plugin::PruneCruft              
-  Dist::Zilla::Plugin::RecommendedPrereqs      
+  Dist::Zilla::Plugin::RecommendedPrereqs      4.06
   Dist::Zilla::Plugin::Repository              0.16
   Dist::Zilla::Plugin::TemplateCJM             4.00
   Dist::Zilla::Plugin::Test::PrereqsFromMeta   
@@ -61,20 +61,17 @@ DEPENDENCIES
 
 
 CHANGES
-    Here's what's new in version 4.12 of Dist-Zilla-PluginBundle-CJM:
+    Here's what's new in version 4.13 of Dist-Zilla-PluginBundle-CJM:
     (See the file "Changes" for the full revision history.)
 
-	- Add Test::PrereqsFromMeta
-	- Pass pod_finder param to PodLoom and TemplateCJM (as finder)
-	- Pass template_file param to TemplateCJM (as file)
-	- The @CJM bundle has been removed.  You should replace [@CJM]
-	  with [@Author::CJM / CJM] in your dist.ini
+	- Pass mb_class param to builder plugin
+	- Require RecommendedPrereqs version 4.06 (latest version)
 
 
 
 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Christopher J. Madsen.
+This software is copyright (c) 2012 by Christopher J. Madsen.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

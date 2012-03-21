@@ -37,7 +37,7 @@ my %WriteMakefileArgs = (
     "Dist::Zilla::Plugin::PodLoom" => "4.10",
     "Dist::Zilla::Plugin::PodSyntaxTests" => 0,
     "Dist::Zilla::Plugin::PruneCruft" => 0,
-    "Dist::Zilla::Plugin::RecommendedPrereqs" => 0,
+    "Dist::Zilla::Plugin::RecommendedPrereqs" => "4.06",
     "Dist::Zilla::Plugin::Repository" => "0.16",
     "Dist::Zilla::Plugin::TemplateCJM" => "4.00",
     "Dist::Zilla::Plugin::Test::PrereqsFromMeta" => 0,
@@ -50,7 +50,7 @@ my %WriteMakefileArgs = (
     "Moose" => "0.65",
     "Moose::Autobox" => "0.09"
   },
-  "VERSION" => "4.12",
+  "VERSION" => "4.13",
   "test" => {
     "TESTS" => "t/*.t"
   }
