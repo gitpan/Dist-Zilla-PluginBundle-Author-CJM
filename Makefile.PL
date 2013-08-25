@@ -39,8 +39,8 @@ my %WriteMakefileArgs = (
     "Dist::Zilla::Plugin::PruneCruft" => 0,
     "Dist::Zilla::Plugin::RecommendedPrereqs" => "4.06",
     "Dist::Zilla::Plugin::Repository" => "0.16",
-    "Dist::Zilla::Plugin::TemplateCJM" => "4.00",
-    "Dist::Zilla::Plugin::Test::PrereqsFromMeta" => 0,
+    "Dist::Zilla::Plugin::TemplateCJM" => "4.20",
+    "Dist::Zilla::Plugin::Test::PrereqsFromMeta" => "4.20",
     "Dist::Zilla::Plugin::TestRelease" => 0,
     "Dist::Zilla::Plugin::UploadToCPAN" => 0,
     "Dist::Zilla::Plugin::VersionFromModule" => "0.08",
@@ -50,12 +50,26 @@ my %WriteMakefileArgs = (
     "Moose" => "0.65",
     "Moose::Autobox" => "0.09"
   },
-  "VERSION" => "4.13",
+  "TEST_REQUIRES" => {},
+  "VERSION" => "4.20",
   "test" => {
     "TESTS" => "t/*.t"
   }
 );
 
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  my $tr = delete $WriteMakefileArgs{TEST_REQUIRES};
+  my $br = $WriteMakefileArgs{BUILD_REQUIRES};
+  for my $mod ( keys %$tr ) {
+    if ( exists $br->{$mod} ) {
+      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
+    }
+    else {
+      $br->{$mod} = $tr->{$mod};
+    }
+  }
+}
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
   my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};

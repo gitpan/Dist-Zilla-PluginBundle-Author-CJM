@@ -1,4 +1,4 @@
-Dist-Zilla-PluginBundle-CJM version 4.13, released March 21, 2012
+Dist-Zilla-PluginBundle-CJM version 4.20, released August 24, 2013
 
 
 Dist::Zilla::PluginBundle::CJM is the basic configuration I use when
@@ -47,8 +47,8 @@ DEPENDENCIES
   Dist::Zilla::Plugin::PruneCruft              
   Dist::Zilla::Plugin::RecommendedPrereqs      4.06
   Dist::Zilla::Plugin::Repository              0.16
-  Dist::Zilla::Plugin::TemplateCJM             4.00
-  Dist::Zilla::Plugin::Test::PrereqsFromMeta   
+  Dist::Zilla::Plugin::TemplateCJM             4.20
+  Dist::Zilla::Plugin::Test::PrereqsFromMeta   4.20
   Dist::Zilla::Plugin::TestRelease             
   Dist::Zilla::Plugin::UploadToCPAN            
   Dist::Zilla::Plugin::VersionFromModule       0.08
@@ -61,17 +61,20 @@ DEPENDENCIES
 
 
 CHANGES
-    Here's what's new in version 4.13 of Dist-Zilla-PluginBundle-CJM:
+    Here's what's new in version 4.20 of Dist-Zilla-PluginBundle-CJM:
     (See the file "Changes" for the full revision history.)
 
-	- Pass mb_class param to builder plugin
-	- Require RecommendedPrereqs version 4.06 (latest version)
+	- Pass template_date_format param to TemplateCJM (as date_format)
+	  Default value is "MMMM d, y".	 This allows Changes to follow
+	  CPAN::Changes::Spec while still using English dates elsewhere.
+	- Require TemplateCJM version 4.20 (supports date_format)
+	- Require Test::PrereqsFromMeta 4.20 (latest version)
 
 
 
 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Christopher J. Madsen.
+This software is copyright (c) 2013 by Christopher J. Madsen.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
