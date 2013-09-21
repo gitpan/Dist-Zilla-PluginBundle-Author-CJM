@@ -44,7 +44,7 @@ requires:
   Moose::Autobox: 0.09
 resources:
   repository: git://github.com/madsen/dist-zilla-pluginbundle-cjm.git
-version: 4.20
+version: 4.30
 x_Dist_Zilla:
   perl:
     version: 5.014002
@@ -90,10 +90,6 @@ x_Dist_Zilla:
       name: CJM/PodCoverageTests
       version: 4.300034
     -
-      class: Dist::Zilla::Plugin::ExtraTests
-      name: CJM/ExtraTests
-      version: 4.300034
-    -
       class: Dist::Zilla::Plugin::PodLoom
       config:
         Pod::Loom version: 0.06
@@ -103,6 +99,10 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::MakeMaker
       name: CJM/MakeMaker
       version: 4.300034
+    -
+      class: Dist::Zilla::Plugin::RunExtraTests
+      name: CJM/RunExtraTests
+      version: 0.007
     -
       class: Dist::Zilla::Plugin::MetaConfig
       name: CJM/MetaConfig
@@ -126,7 +126,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::TemplateCJM
       name: CJM/TemplateCJM
-      version: 4.20
+      version: 4.21
     -
       class: Dist::Zilla::Plugin::Repository
       name: CJM/Repository

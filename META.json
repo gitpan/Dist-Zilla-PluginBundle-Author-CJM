@@ -68,7 +68,7 @@
          "web" : "http://github.com/madsen/dist-zilla-pluginbundle-cjm"
       }
    },
-   "version" : "4.20",
+   "version" : "4.30",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.014002"
@@ -125,11 +125,6 @@
             "version" : "4.300034"
          },
          {
-            "class" : "Dist::Zilla::Plugin::ExtraTests",
-            "name" : "CJM/ExtraTests",
-            "version" : "4.300034"
-         },
-         {
             "class" : "Dist::Zilla::Plugin::PodLoom",
             "config" : {
                "Pod::Loom version" : "0.06"
@@ -141,6 +136,11 @@
             "class" : "Dist::Zilla::Plugin::MakeMaker",
             "name" : "CJM/MakeMaker",
             "version" : "4.300034"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::RunExtraTests",
+            "name" : "CJM/RunExtraTests",
+            "version" : "0.007"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaConfig",
@@ -170,7 +170,7 @@
          {
             "class" : "Dist::Zilla::Plugin::TemplateCJM",
             "name" : "CJM/TemplateCJM",
-            "version" : "4.20"
+            "version" : "4.21"
          },
          {
             "class" : "Dist::Zilla::Plugin::Repository",

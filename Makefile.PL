@@ -51,7 +51,7 @@ my %WriteMakefileArgs = (
     "Moose::Autobox" => "0.09"
   },
   "TEST_REQUIRES" => {},
-  "VERSION" => "4.20",
+  "VERSION" => "4.30",
   "test" => {
     "TESTS" => "t/*.t"
   }
