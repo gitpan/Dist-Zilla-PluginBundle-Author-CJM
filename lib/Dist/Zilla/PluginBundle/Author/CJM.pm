@@ -17,8 +17,8 @@ package Dist::Zilla::PluginBundle::Author::CJM;
 # ABSTRACT: Build a distribution like CJM
 #---------------------------------------------------------------------
 
-our $VERSION = '4.30';
-# This file is part of Dist-Zilla-PluginBundle-Author-CJM 4.30 (September 21, 2013)
+our $VERSION = '4.31';
+# This file is part of Dist-Zilla-PluginBundle-Author-CJM 4.31 (December 21, 2013)
 
 use Moose;
 use Moose::Autobox;
@@ -63,7 +63,8 @@ sub configure
       MatchManifest
     ),
     [ RecommendedPrereqs => scalar $self->config_slice({
-        check_recommend => 'finder'
+        check_recommend => 'finder',
+        check_recommend_tests => 'test_finder',
     }) ],
     [ CheckPrereqsIndexed => scalar $self->config_slice({
         skip_index_check => 'skips'
@@ -105,7 +106,8 @@ sub configure
   }
 } # end configure
 
-sub mvp_multivalue_args { qw(check_files check_recommend remove_plugin
+sub mvp_multivalue_args { qw(check_files check_recommend check_recommend_tests
+                             remove_plugin
                              pod_finder skip_index_check template_file) }
 
 no Moose;
@@ -120,8 +122,8 @@ Dist::Zilla::PluginBundle::Author::CJM - Build a distribution like CJM
 
 =head1 VERSION
 
-This document describes version 4.30 of
-Dist::Zilla::PluginBundle::Author::CJM, released September 21, 2013.
+This document describes version 4.31 of
+Dist::Zilla::PluginBundle::Author::CJM, released December 21, 2013.
 
 =head1 SYNOPSIS
 
@@ -190,6 +192,11 @@ Passed to GitVersionCheckCJM as its C<finder>.
 =head2 check_recommend
 
 Passed to RecommendedPrereqs as its C<finder>.
+
+
+=head2 check_recommend_tests
+
+Passed to RecommendedPrereqs as its C<test_finder>.
 
 
 =head2 eumm_version
@@ -269,7 +276,7 @@ or through the web interface at
 L<< http://rt.cpan.org/Public/Bug/Report.html?Queue=Dist-Zilla-PluginBundle-Author-CJM >>.
 
 You can follow or contribute to Dist-Zilla-PluginBundle-Author-CJM's development at
-L<< http://github.com/madsen/dist-zilla-pluginbundle-cjm >>.
+L<< https://github.com/madsen/dist-zilla-pluginbundle-cjm >>.
 
 =head1 COPYRIGHT AND LICENSE
 

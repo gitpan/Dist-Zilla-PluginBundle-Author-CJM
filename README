@@ -1,4 +1,4 @@
-Dist-Zilla-PluginBundle-CJM version 4.30, released September 21, 2013
+Dist-Zilla-PluginBundle-CJM version 4.31, released December 21, 2013
 
 
 Dist::Zilla::PluginBundle::CJM is the basic configuration I use when
@@ -47,6 +47,7 @@ DEPENDENCIES
   Dist::Zilla::Plugin::PruneCruft              
   Dist::Zilla::Plugin::RecommendedPrereqs      4.06
   Dist::Zilla::Plugin::Repository              0.16
+  Dist::Zilla::Plugin::RunExtraTests           
   Dist::Zilla::Plugin::TemplateCJM             4.20
   Dist::Zilla::Plugin::Test::PrereqsFromMeta   4.20
   Dist::Zilla::Plugin::TestRelease             
@@ -61,22 +62,11 @@ DEPENDENCIES
 
 
 CHANGES
-    Here's what's new in version 4.30 of Dist-Zilla-PluginBundle-CJM:
+    Here's what's new in version 4.31 of Dist-Zilla-PluginBundle-CJM:
     (See the file "Changes" for the full revision history.)
 
-	- Use RunExtraTests instead of ExtraTests.  Unfortunately,
-	  this means that the MANIFEST will change, and MatchManifest
-	  will complain about that.
-
-	  If you're working with one of my dists and run into this issue,
-	  please add ":version = 4.30 ; use RunExtraTests" to dist.ini
-	  under [@Author::CJM], and commit dist.ini and MANIFEST in a
-	  separate commit before committing any of your changes.  The
-	  commit message should be:
-
-	    Update to Author::CJM 4.30
-
-	      Release tests are now in xt/
+	- Pass check_recommend_tests param to RecommendedPrereqs
+	- 4.30 neglected to list RunExtraTests as a prerequisite
 
 
 
